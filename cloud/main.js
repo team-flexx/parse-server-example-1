@@ -4,8 +4,8 @@ Parse.Cloud.define('hello', function(req, res) {
 
 
 Parse.Cloud.define("gettingData", async (request) => {
-  const query = new Parse.Query("SMJobs");
-  query.equalTo("companyName", request.params.companyName);
+  const query = new Parse.Query("User");
+  query.equalTo("username", request.params.username);
   const results = await query.find();
-  return results;
+  return results[0].get("applicantRejections");
 });
