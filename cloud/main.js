@@ -13,7 +13,7 @@ Parse.Cloud.define("gettingData", async (request) => {
 //an applicant swipe is saved, so we should look into that jobCard's employer, then
 //and check: (is userID present &  jobID present?) if yes, then send that data to the
 //matches view controller
-Parse.Cloud.afterSave("performMatching", (request) => { //pass in the whole joblisting
+Parse.Cloud.afterSave("SMApplicantSwipeRight", (request) => { //pass in the whole joblisting
   //go to employer's swipe and get jobID userID and check. NOTE: Need to add in userID into Parse
   const query = new Parse.Query("SMEmployerSwipeRight"); 
 
