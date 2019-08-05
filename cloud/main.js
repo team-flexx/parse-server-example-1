@@ -21,7 +21,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight", (request) => { //pass in the whol
   query.equalTo("jobID", request.params.jobID) && query.equalTo("applicantID, request.params.applicantID");
   
   const matchExistsArray = await query.find(); //this is an array of stuff that has the right one, and it SHOULD be one
-
+  MediaKeySystemAccess.out.print(matchExistsArray[0]);
   if (matchExistsArray != undefined){
   //TODO: save a row to matched table in parse
   const SMMatches = Parse.Object.extend("SMMatches");
