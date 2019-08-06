@@ -14,10 +14,10 @@ Parse.Cloud.define("gettingData", async (request) => {
 //and check: (is userID present &  jobID present?) if yes, then send that data to the
 //matches view controller
 
-Parse.Cloud.afterSave(Parse.SMApplicantSwipeRight, (request) => {//pass in the whole joblisting
+Parse.Cloud.afterSave(Parse.SMApplicantSwipeRight, (request, response) => {//pass in the whole joblisting
   //get params from applicant swipe right (jobID, userID)
   //go to employer's swipe and get jobID userID and check. NOTE: Need to add in userID into Parse
-  print("does .afterSave get triggered after something is swiped right?");
+  console.log("does .afterSave get triggered after something is swiped right?");
 
 });
 
