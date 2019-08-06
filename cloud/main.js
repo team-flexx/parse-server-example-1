@@ -18,8 +18,7 @@ Parse.Cloud.define("gettingData", async (request) => {
 Parse.Cloud.afterSave(Parse.SMApplicantSwipeRight, 
   function(request)
   {
-   console.log(request);
-   console.log("testingg this aftersave");
+   return "something";
   }
 );
 
