@@ -12,12 +12,8 @@ Parse.Cloud.define("gettingData", async (request) => {
 
 
 //function = the function to run after save, which takes one paramter, Parse.Cloud.TriggerRequest
-Parse.Cloud.afterSave(Parse.SMApplicantSwipeRight,(request) =>{
-  const query = new Parse.Query("SMEmployerSwipeRight");
-  query.equalTo("jobID", request.params.jobID)
-  const matchExistsArray = await query.find();
-  return matchExistsArray;
-
+Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
+  console.log("helloooo");
 }
 );
 
