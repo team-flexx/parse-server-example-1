@@ -22,9 +22,11 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   const swipedAuthorInfo = request.object.get("author");
   logger.info("swipedAuthorInfo stringified version: "+ JSON.stringify(swipedAuthorInfo));
   
-  const userID = JSON.parse(swipedAuthorInfo);
+  const userID = JSON.parse(JSON.stringify(swipedAuthorInfo));
   logger.info("userID stringified version: "+ userID.get("objectId"));
 
 }
 );
+
+
 
