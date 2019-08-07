@@ -98,6 +98,8 @@ Parse.Cloud.define("getMatchedCardInfo", async (request) => {
   query.equalTo("user", request.params.user);
   const allMatchedJobs = await query.find(); //should be array of dictionariies of SMMatches
 
+
   logger.info(allMatchedJobs[0]);
+  return allMatchedJobs[0];
   //GET ALL JOB LISTINGS FROM USER'S ID IN SMMATCHES
 });
