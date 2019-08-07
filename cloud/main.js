@@ -26,7 +26,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
   logger.info("swipedAuthorInfo stringified version: "+ swipedUserID);
   
-  const storeMatchBool = false; //set default to false
+  const storeMatchBool = true; //set default to false
   //DIFERENT TEST
   Parse.Cloud.run("didEmployerSwipe", { jobID: swipedJobID, applicantIDPlainText: swipedUserID}).then(function(result) {
     logger.info("result :" + JSON.stringify(result));
@@ -37,19 +37,13 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   });
 
   //add row
-  // if (storeMatchBool){ //if match exists
-  //   logger.info("let's add a new row");
-
-    
-  // }
-  // else{
-  //   logger.info("no new matches")
-  // }
+  if (storeMatchBool){ //if match exists
+    logger.info("let's add a new row");
     var SMMatches = Parse.Object.extend("SMMatches");
     var aNewMatch = new SMMatches();
-    aNewMatch.set("user", "test");
-    aNewMatch.set("employer", "test");
-    aNewMatch.set("matchedJobID", "test");
+    aNewMatch.set("user", swipedUserID);
+    aNewMatch.set("employer", "n/a");
+    aNewMatch.set("matchedJobID", swipedJobID);
 
     aNewMatch.save()
       .then((aNewMatch) => {
@@ -60,6 +54,10 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
         // error is a Parse.Error with an error code and message.
         alert('Failed to create new object, with error code: ' + error.message);
       });
+  }
+  else{
+    logger.info("no new matches")
+  }
 }
 );
 
