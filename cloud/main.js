@@ -10,10 +10,11 @@ Parse.Cloud.define("gettingData", async (request) => {
   return results[0].get("applicantRejections");
 });
 
+const logger = require('parse-server').logger;
 
 //function = the function to run after save, which takes one paramter, Parse.Cloud.TriggerRequest
 Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
-  console.log("helloooo");
+  console.logger("testing the aftersave ")
 }
 );
 
