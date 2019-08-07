@@ -53,34 +53,33 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
     logger.info("result :" + JSON.stringify(result));
     storeMatchBool = result;
     logger.info(storeMatchBool);
+            //add row
+          if (result){ //if match exists
+            logger.info("let's add a new row");
+            var SMMatches = Parse.Object.extend("SMMatches");
+            var aNewMatch = new SMMatches();
+            aNewMatch.set("user", swipedUserID);
+            aNewMatch.set("employer", stringVersionCompany); //TODO: check if this works
+            aNewMatch.set("matchedJobID", swipedJobID);
+            //TODO: check if this works
+            aNewMatch.set("jobURL", encoded); //encoded);
+
+            aNewMatch.save()
+              .then((aNewMatch) => {
+                // Execute any logic that should take place after the object is saved.
+                alert('New object created with objectId: ' + aNewMatch.id);
+              }, (error) => {
+                // Execute any logic that should take place if the save fails.
+                // error is a Parse.Error with an error code and message.
+                alert('Failed to create new object, with error code: ' + error.message);
+              });
+          }
+          else{
+            logger.info("no new matches")
+          }
   }, function(error) {
     logger.info("something went wrong calling cloud function in cloud");
   });
-
-  //add row
-  if (storeMatchBool){ //if match exists
-    logger.info("let's add a new row");
-    var SMMatches = Parse.Object.extend("SMMatches");
-    var aNewMatch = new SMMatches();
-    aNewMatch.set("user", swipedUserID);
-    aNewMatch.set("employer", stringVersionCompany); //TODO: check if this works
-    aNewMatch.set("matchedJobID", swipedJobID);
-    //TODO: check if this works
-    aNewMatch.set("jobURL", encoded); //encoded);
-
-    aNewMatch.save()
-      .then((aNewMatch) => {
-        // Execute any logic that should take place after the object is saved.
-        alert('New object created with objectId: ' + aNewMatch.id);
-      }, (error) => {
-        // Execute any logic that should take place if the save fails.
-        // error is a Parse.Error with an error code and message.
-        alert('Failed to create new object, with error code: ' + error.message);
-      });
-  }
-  else{
-    logger.info("no new matches")
-  }
 }
 );
 
@@ -106,7 +105,7 @@ Parse.Cloud.define("getMatchedCardInfo", async (request) => {
   query.equalTo("user", request.params.user);
   const allMatchedJobs = await query.find(); //should be array of dictionariies of SMMatches
 
-
+  logger.info("here are the matchedjobs: ");
   logger.info(allMatchedJobs);
   return allMatchedJobs;
   //GET ALL JOB LISTINGS FROM USER'S ID IN SMMATCHES
