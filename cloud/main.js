@@ -28,9 +28,11 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   
   //query for employer swipe rights
   const query = new Parse.Query("SMEmployerSwipeRight");
-  query.equalTo("jobID", 31530)  //later add in user
-  const results = await query.find();
-  logger.info(results);
+  query.equalTo("jobID", "31530");  //later add in user
+
+  //something here breaks dashboard
+  // const results = await query.find();
+  // logger.info(results);
 
 }
 );
