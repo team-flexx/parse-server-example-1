@@ -55,7 +55,7 @@ Parse.Cloud.define("jobIDInEmployer?", async (request) => {
   query.equalTo("jobID", request.params.jobID);
   const results = await query.find();
   //return results[0].get("createdAt");
-  if (results == undefined || array.length == 0) {
+  if (results == undefined || results.length == 0) {
     // array empty or does not exist
     return false; //employer didn't swipe
   }else{
