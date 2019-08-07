@@ -108,7 +108,7 @@ Parse.Cloud.define("getMatchedCardInfo", async (request) => {
 
 
   logger.info(allMatchedJobs[0]);
-  return allMatchedJobs;
+  return "here are the matches: "+ allMatchedJobs[0];
   //GET ALL JOB LISTINGS FROM USER'S ID IN SMMATCHES
 });
 
