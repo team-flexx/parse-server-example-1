@@ -32,7 +32,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
 
   //something here breaks dashboard
   const results = await query.find();
-  logger.info("here are the results: ", results);
+  logger.info("here are the results: " + results);
 
 }
 );
