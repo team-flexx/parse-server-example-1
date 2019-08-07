@@ -45,8 +45,8 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   // else{
   //   logger.info("no new matches")
   // }
-
-    const aNewMatch = new SMMatches();
+    var SMMatches = Parse.Object.extend("GameScore");
+    var aNewMatch = new SMMatches();
     aNewMatch.set("user", "test");
     aNewMatch.set("employer", "test");
     aNewMatch.set("matchedJobID", "test");
