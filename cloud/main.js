@@ -26,15 +26,20 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
   logger.info("swipedAuthorInfo stringified version: "+ swipedUserID);
   
-  //query for employer swipe rights
-  const query = new Parse.Query("SMEmployerSwipeRight");
-  query.equalTo("jobID", "31530");  //later add in user
 
+  //this breaks parse
   //find jobID and userID from employer SwipeRight
-  const params = { jobID: "31530", applicantIDPlainText: "AvDGgEMpI3"};
-  const isMatchBool = await Parse.Cloud.run("didEmployerSwipe?", params); //should be 1 or 0
+  // const params = { jobID: "31530", applicantIDPlainText: "AvDGgEMpI3"};
+  // const isMatchBool = await Parse.Cloud.run("didEmployerSwipe?", params); //should be 1 or 0
   
-  logger.info(isMatchBool);
+  // logger.info(isMatchBool);
+
+  //DIFERENT TEST
+  Parse.Cloud.run("didEmployerSwipe?", { jobID: "31530", applicantIDPlainText: "AvDGgEMpI3"}).then(function(result) {
+    console.log("result :" + JSON.stringify(result));
+  }, function(error) {
+    logger.info("something went wrong calling cloud function in cloud");
+  });
 
 }
 );
