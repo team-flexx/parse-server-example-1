@@ -31,7 +31,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   query.equalTo("jobID", "31530");  //later add in user
 
   //something here breaks dashboard
-  const results = await query.find();
+  //const results = await query.find();
   logger.info("trying to print results: ");
   //logger.info(results[0]);
 
