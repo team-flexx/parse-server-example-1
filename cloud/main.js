@@ -16,8 +16,12 @@ const logger = require('parse-server').logger;//need this to log data in Parse
 Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   logger.info("from the aftersave method");
 
-  const swipedJobID = request.object.get("jobID")
+  const swipedJobID = request.object.get("jobID");
   logger.info("the swiped job ID: "+ swipedJobID);//this is how to get the info from the joblisting
+
+  const swipedAuthor = request.object.get("author");
+  logger.info("the swiped author: "+ swipedAuthor);
+
 
 }
 );
