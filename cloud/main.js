@@ -36,11 +36,15 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
 
 }
 );
-
+//"author":{"__type":"Pointer","className":"_User","objectId":"oR0SOK0jUz"}
 Parse.Cloud.define("didEmployerSwipe?", async (request) => {
   const query = new Parse.Query("SMEmployerSwipeRight");
+
+  const applicantIDDict = query.object.get("applicantID");
+  const stringVersion = JSON.stringify(applicantIDDict);
+  logger.info("applicant id dict: "+ stringVersion); 
   //query.equalTo("jobID", request.params.jobID) 
-  query.equalTo("applicantID", request.params.applicantID);
-  const results = await query.find();
-  return results[0].get("createdAt");
+  // query.equalTo("applicantID", request.params.applicantID); //applicantID probably looks like
+  // const results = await query.find();
+  // return results[0].get("createdAt");
 });
