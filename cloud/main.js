@@ -32,9 +32,17 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
     logger.info("result :" + JSON.stringify(result));
     storeMatchBool = result;
     logger.info(storeMatchBool);
+
+    //add row
+    if (storeMatchBool){ //if match exists
+      logger.info("let's add a new row");
+    }
+
+
   }, function(error) {
     logger.info("something went wrong calling cloud function in cloud");
   });
+
 
 }
 );
