@@ -31,24 +31,14 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   query.equalTo("jobID", "31530");  //later add in user
 
   //find jobID and userID from employer SwipeRight
-
-
+  const params = { jobID: "31530", applicantIDPlainText: "AvDGgEMpI3"};
+  const isMatchBool = await Parse.Cloud.run("didEmployerSwipe?", params); //should be 1 or 0
+  loggern.info("checking match...");
+  logger.info(isMatchBool);
 
 }
 );
-//"author":{"__type":"Pointer","className":"_User","objectId":"oR0SOK0jUz"}
-// Parse.Cloud.define("didEmployerSwipe?", async (request) => {
-//   const query = new Parse.Query("SMEmployerSwipeRight");
 
-//   const applicantIDDict = query.object.get("applicantID");
-//   const results = await query.find();
-//   const stringVersion = JSON.stringify(applicantIDDict);
-//   return "applicant id dict: "+ stringVersion; 
-//   //query.equalTo("jobID", request.params.jobID) 
-//   // query.equalTo("applicantID", request.params.applicantID); //applicantID probably looks like
-//   // const results = await query.find();
-//   // return results[0].get("createdAt");
-// });
 
 Parse.Cloud.define("didEmployerSwipe?", async (request) => {
   const query = new Parse.Query("SMEmployerSwipeRight");
