@@ -112,11 +112,3 @@ Parse.Cloud.define("getMatchedCardInfo", async (request) => {
   //GET ALL JOB LISTINGS FROM USER'S ID IN SMMATCHES
 });
 
-
-"<SMMatches: 0x600002174420, objectId: sPEjOxZXBq, localId: (null)> {\n    employer = \"n/a\";\n    matchedJobID = 31538;\n    user = 4FPxujiI;\n}",
-    "<SMMatches: 0x600002174cc0, objectId: Ba95D0yaPd, localId: (null)> {\n    employer = \"n/a\";\n    matchedJobID = 31538;\n    user = 4FPxujiI;\n}",
-    "<SMMatches: 0x600002175920, objectId: NrrTRHueuU, localId: (null)> {\n    employer = \"n/a\";\n    matchedJobID = 31538;\n    user = 4FPxujiI;\n}",
-    "<SMMatches: 0x6000021742a0, objectId: HBJmAZUv27, localId: (null)> {\n    employer = \"n/a\";\n    matchedJobID = 31538;\n    user = 4FPxujiI;\n}",
-    "<SMMatches: 0x6000021743c0, objectId: dQZG2dPAqV, localId: (null)> {\n    employer = \"n/a\";\n    matchedJobID = 31538;\n    user = 4FPxujiI;\n}",
-    "<SMMatches: 0x6000021745a0, objectId: YKNPNcy611, localId: (null)> {\n    employer = \"\\\"Uniform Teeth\\\"\";\n    jobURL = \"\\\"https://authenticjobs.com/jobs/31540/lead-ux-designer\\\"\";\n    matchedJobID = 31540;\n    user = 4FPxujiI;\n}",
-    "<SMMatches: 0x600002174060, objectId: aAZV3XN0HV, localId: (null)> {\n    employer = \"\\\"Uniform Teeth\\\"\";\n    jobPointer = \"<SMJobListing: 0x600002174540, objectId: X5JP6A9omH, localId: (null)>\";\n    jobURL = \"\\\"https://authenticjobs.com/jobs/31540/lead-ux-designer\\\"\";\n    matchedJobID = 31540;\n    user = 4FPxujiI;\n}"
