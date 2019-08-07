@@ -36,8 +36,16 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
 
   //get apply url from applicant swipe right, TODO: CHECK IF THIS WORKS
   const swipedJobURL = request.object.get("jobURL");
-  const stringVersionURL = JSON.stringify(swipedJobURL);
-
+  //const stringVersionURL = JSON.stringify(swipedJobURL);
+  var uri = swipedJobURL;
+  var encoded = encodeURI(uri);
+  logger.info(encoded);
+  try {
+  logger.info(decodeURI(encoded));
+  // expected output: "https://mozilla.org/?x=шеллы"
+} catch(e) { // catches a malformed URI
+  logger.info(e);
+}
 
   const storeMatchBool = true; //TODO: set default to false
 
@@ -58,7 +66,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
     aNewMatch.set("employer", stringVersionCompany); //TODO: check if this works
     aNewMatch.set("matchedJobID", swipedJobID);
     //TODO: check if this works
-    aNewMatch.set("jobURL", stringVersionURL);
+    aNewMatch.set("jobURL", encoded);
 
     aNewMatch.save()
       .then((aNewMatch) => {
