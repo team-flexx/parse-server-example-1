@@ -35,7 +35,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   // logger.info(isMatchBool);
 
   //DIFERENT TEST
-  Parse.Cloud.run("didEmployerSwipe", { jobID: "31534", applicantIDPlainText: "AvDGgEMpI3"}).then(function(result) {
+  Parse.Cloud.run("didEmployerSwipe", { jobID: swipedJobID, applicantIDPlainText: swipedUserID}).then(function(result) {
     logger.info("result :" + JSON.stringify(result));
   }, function(error) {
     logger.info("something went wrong calling cloud function in cloud");
