@@ -26,6 +26,12 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
   logger.info("swipedAuthorInfo stringified version: "+ swipedUserID);
   
+  //query for employer swipe rights
+  const query = new Parse.Query("SMEmployerSwipeRight");
+  query.equalTo(jobID, swipedJobID)  //later add in user
+  const results = await query.find();
+
+  logger.info(results);
 
 }
 );
