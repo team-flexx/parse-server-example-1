@@ -21,8 +21,10 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
 
   const swipedAuthorInfo = request.object.get("author");
   
-  logger.info("swipedAuthorInfo: "+ JSON.stringify(swipedAuthorInfo).get("objectId"));
+  logger.info("swipedAuthorInfo: "+ JSON.stringify(swipedAuthorInfo));
   
+  const authorDict = JSON.stringify(swipedAuthorInfo);
+  logger.info("user: "+authorDict.get("objectId"));
 
 
 }
