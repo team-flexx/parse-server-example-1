@@ -28,30 +28,30 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   
   const storeMatchBool = false; //set default to false
   //DIFERENT TEST
-  Parse.Cloud.run("didEmployerSwipe", { jobID: "31538", applicantIDPlainText: swipedUserID}).then(function(result) {
+  Parse.Cloud.run("didEmployerSwipe", { jobID: swipedJobID, applicantIDPlainText: swipedUserID}).then(function(result) {
     logger.info("result :" + JSON.stringify(result));
     storeMatchBool = result;
     logger.info(storeMatchBool);
-
-    //add row
-    if (storeMatchBool){ //if match exists
-      logger.info("let's add a new row");
-
-      const SMMatches = Parse.Object.extend("SMMatches");
-      const aNewMatch = new SMMatches();
-
-      aNewMatch.set("user", "test");
-      aNewMatch.set("employer", "test");
-      aNewMatch.set("matchedJobID", "test");
-    }
-    else{
-      logger.info("no new matches")
-    }
-
-
   }, function(error) {
     logger.info("something went wrong calling cloud function in cloud");
   });
+
+  //add row
+  // if (storeMatchBool){ //if match exists
+  //   logger.info("let's add a new row");
+
+    
+  // }
+  // else{
+  //   logger.info("no new matches")
+  // }
+
+    const SMMatches = Parse.Object.extend("SMMatches");
+    const aNewMatch = new SMMatches();
+
+    aNewMatch.set("user", "test");
+    aNewMatch.set("employer", "test");
+    aNewMatch.set("matchedJobID", "test");
 
 
 }
