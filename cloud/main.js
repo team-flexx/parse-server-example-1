@@ -30,16 +30,16 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   const query = new Parse.Query("SMEmployerSwipeRight");
   query.equalTo("jobID", "31530");  //later add in user
 
-  //something here breaks dashboard
-  // const results = await query.find();
-  // logger.info(results);
+  //find jobID and userID from employer SwipeRight
+
+
 
 }
 );
 
 Parse.Cloud.define("didEmployerSwipe?", async (request) => {
   const query = new Parse.Query("SMEmployerSwipeRight");
-  query.equalTo("jobID", request.params.jobID);
+  query.equalTo("jobID", request.params.jobID) && query.equalTo("applicantID", request.params.applicantID);
   const results = await query.find();
   return results[0].get("createdAt");
 });
