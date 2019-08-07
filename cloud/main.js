@@ -14,7 +14,9 @@ const logger = require('parse-server').logger;
 
 //function = the function to run after save, which takes one paramter, Parse.Cloud.TriggerRequest
 Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
-  logger.info("testing the aftersave ")
+  
+  logger.info("from the aftersave method");
+  logger.info(request.object.get("jobID"));
 }
 );
 
