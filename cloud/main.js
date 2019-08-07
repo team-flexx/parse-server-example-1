@@ -52,7 +52,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
 
 Parse.Cloud.define("didEmployerSwipe?", async (request) => {
   const query = new Parse.Query("SMEmployerSwipeRight");
-  query.equalTo("jobID", request.params.jobID) && query.equalTo("applicantID", request.params.applicantID);
+  query.equalTo("jobID", request.params.jobID) && query.equalTo("applicantIDPlainText", request.params.applicantIDPlainText);
   const results = await query.find();
   //return results[0].get("createdAt");
   if (results == undefined || results.length == 0) {
