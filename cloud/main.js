@@ -33,7 +33,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   //find jobID and userID from employer SwipeRight
   const params = { jobID: "31530", applicantIDPlainText: "AvDGgEMpI3"};
   const isMatchBool = await Parse.Cloud.run("didEmployerSwipe?", params); //should be 1 or 0
-  logger.info("checking match...");
+  
   logger.info(isMatchBool);
 
 }
