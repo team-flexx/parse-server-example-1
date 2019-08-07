@@ -1,3 +1,7 @@
+const logger = require('parse-server').logger;//need this to log data in Parse 
+
+
+
 Parse.Cloud.define('hello', function(req, res) {
   return 'not hi';
 });
@@ -10,7 +14,7 @@ Parse.Cloud.define("gettingData", async (request) => {
   return results[0].get("applicantSwipes");
 });
 
-const logger = require('parse-server').logger;//need this to log data in Parse 
+
 
 //function = the function to run after save, which takes one paramter, Parse.Cloud.TriggerRequest
 Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
@@ -25,9 +29,18 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   const stringVersion = JSON.stringify(swipedAuthorInfo);
   const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
   logger.info("swipedAuthorInfo stringified version: "+ swipedUserID);
-  
-  const storeMatchBool = true; //set default to false
-  //DIFERENT TEST
+
+  //get company from applicant swipe right, TODO: CHECK IF THIS WORKS
+  const swipedCompany = request.object.get("companyName")
+  const stringVersionCompany = JSON.stringify(swipedCompany);
+
+  //get apply url from applicant swipe right, TODO: CHECK IF THIS WORKS
+  const swipedJobURL = request.object.get("jobURL");
+  const stringVersionURL = JSON.stringify(swipedJobURL);
+
+
+  const storeMatchBool = true; //TODO: set default to false
+
   Parse.Cloud.run("didEmployerSwipe", { jobID: swipedJobID, applicantIDPlainText: swipedUserID}).then(function(result) {
     logger.info("result :" + JSON.stringify(result));
     storeMatchBool = result;
@@ -42,8 +55,10 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
     var SMMatches = Parse.Object.extend("SMMatches");
     var aNewMatch = new SMMatches();
     aNewMatch.set("user", swipedUserID);
-    aNewMatch.set("employer", "n/a");
+    aNewMatch.set("employer", stringVersionCompany); //TODO: check if this works
     aNewMatch.set("matchedJobID", swipedJobID);
+    //TODO: check if this works
+    aNewMatch.set("jobURL", stringVersionURL);
 
     aNewMatch.save()
       .then((aNewMatch) => {
@@ -74,4 +89,15 @@ Parse.Cloud.define("didEmployerSwipe", async (request) => {
     //logger.info(results[0].get("createdAt"));
     return true; //in xcode this returns 1
   } 
+});
+
+//TO BE CALLED ON FROM MATCHED VC, RETURN A DICTIONARY OF JOB COMPANY, APPLY-URL, JOB POSITION NAME
+//pass in job id
+Parse.Cloud.define("getMatchedCardInfo", async (request) => {
+  const query = new Parse.Query("SMMatches");
+  query.equalTo("user", request.params.user);
+  const allMatchedJobs = await query.find(); //should be array of dictionariies of SMMatches
+
+  logger.info(allMatchedJobs[0]);
+  //GET ALL JOB LISTINGS FROM USER'S ID IN SMMATCHES
 });
