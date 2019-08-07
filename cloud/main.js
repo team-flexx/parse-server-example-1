@@ -10,13 +10,15 @@ Parse.Cloud.define("gettingData", async (request) => {
   return results[0].get("applicantRejections");
 });
 
-const logger = require('parse-server').logger;
+const logger = require('parse-server').logger;//need this to log data in Parse 
 
 //function = the function to run after save, which takes one paramter, Parse.Cloud.TriggerRequest
 Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
-  
   logger.info("from the aftersave method");
-  logger.info(request.object.get("jobID"));
+
+  const swipedJobID = request.object.get("jobID")
+  logger.info("the swiped job ID: "+ swipedJobID);//this is how to get the info from the joblisting
+
 }
 );
 
