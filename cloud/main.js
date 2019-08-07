@@ -46,14 +46,20 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   //   logger.info("no new matches")
   // }
 
-    const SMMatches = Parse.Object.extend("SMMatches");
     const aNewMatch = new SMMatches();
-
     aNewMatch.set("user", "test");
     aNewMatch.set("employer", "test");
     aNewMatch.set("matchedJobID", "test");
 
-
+    aNewMatch.save()
+      .then((aNewMatch) => {
+        // Execute any logic that should take place after the object is saved.
+        alert('New object created with objectId: ' + aNewMatch.id);
+      }, (error) => {
+        // Execute any logic that should take place if the save fails.
+        // error is a Parse.Error with an error code and message.
+        alert('Failed to create new object, with error code: ' + error.message);
+      });
 }
 );
 
