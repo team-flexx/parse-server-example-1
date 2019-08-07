@@ -66,7 +66,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
     aNewMatch.set("employer", stringVersionCompany); //TODO: check if this works
     aNewMatch.set("matchedJobID", swipedJobID);
     //TODO: check if this works
-    aNewMatch.set("jobURL", encoded);
+    aNewMatch.set("jobURL", "sjknfjksndfjsndjksnd"); //encoded);
 
     aNewMatch.save()
       .then((aNewMatch) => {
@@ -108,6 +108,6 @@ Parse.Cloud.define("getMatchedCardInfo", async (request) => {
 
 
   logger.info(allMatchedJobs[0]);
-  return allMatchedJobs[0];
+  return allMatchedJobs;
   //GET ALL JOB LISTINGS FROM USER'S ID IN SMMATCHES
 });
