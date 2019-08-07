@@ -29,9 +29,3 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
 }
 );
 
-
-xvar obj = {
-  valueOf: function() {
-    return 42;
-  }
-};
