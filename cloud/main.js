@@ -42,7 +42,7 @@ Parse.Cloud.define("didEmployerSwipe?", async (request) => {
 
   const applicantIDDict = query.object.get("applicantID");
   const stringVersion = JSON.stringify(applicantIDDict);
-  logger.info("applicant id dict: "+ stringVersion); 
+  return "applicant id dict: "+ stringVersion; 
   //query.equalTo("jobID", request.params.jobID) 
   // query.equalTo("applicantID", request.params.applicantID); //applicantID probably looks like
   // const results = await query.find();
