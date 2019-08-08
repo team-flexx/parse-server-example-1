@@ -30,7 +30,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   const swipedUserPointer = request.user;
   
   //get job POINTERR
-  const swipedJobPointer = request.object;
+  const swipedJobPointer = request.object.get("jobListingPointer");
 
   const storeMatchBool = true; //set default to false
  
