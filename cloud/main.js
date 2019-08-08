@@ -99,7 +99,7 @@ Parse.Cloud.define("getMatchedData", async (request) => {
 
     const wholeRequest = JSON.stringify(request);
     var obj = JSON.parse(wholeRequest);
-    logger.info(obj);
+    logger.info("heres the whole request but parsed" + JSON.stringify(obj));
 
     //return("here are the results for your matches: " + JSON.stringify(results));
     // const matchName = request.user;
