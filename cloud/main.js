@@ -42,6 +42,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
     var SMMatches = Parse.Object.extend("SMMatches");
     var aNewMatch = new SMMatches();
     aNewMatch.set("user", swipedUserID);
+    aNewMatch.set("userPointer", swipedUserID); //CHANGED THIS ONE LINE JUST NOW
     aNewMatch.set("employer", "n/a");
     aNewMatch.set("matchedJobID", swipedJobID);
 
