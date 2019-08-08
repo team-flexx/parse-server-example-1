@@ -115,6 +115,18 @@ Parse.Cloud.define("getMatchedData", async (request) => {
 
   query.find().then(function(results){
     logger.info("HERE ARE RESULTS: "+JSON.stringify(results));
+    var obj = JSON.parse(results);
+    for (i = 0; i < results.length; i++) {
+      logger.info(JSON.stringify(obj[i]["jobPointer"]["objectId"]));
+      //GET THE JOB LISTING OBJECT ID
+      //QUERY INTO SMJOBLISTING AND PULL UP COMPANY NAME AND EMPLOYER URL
+    }
+
   });
 });
 
+// [{"jobPointer":
+// {"__type":"Pointer","className":"SMJobListing","objectId":"pQyaeFXdR8"},
+// "createdAt":"2019-08-08T19:49:26.044Z",
+// "updatedAt":"2019-08-08T19:49:26.044Z",
+// "objectId":"F2fd3ivotI"},
