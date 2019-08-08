@@ -85,3 +85,16 @@ Parse.Cloud.define("didEmployerSwipe", async (request) => {
     return true; //in xcode this returns 1
   } 
 });
+
+Parse.Cloud.define("getMatchedData", async (request) => {
+  const query = new Parse.Query("SMMatches");
+  query.equalTo("user", request.params.user); //found that the user as matches, then we want return its pointers to job
+  const results = await query.find();
+  //return results[0].get("createdAt");
+  if (results == undefined || results.length == 0) {
+    // array empty or does not exist
+    logger.info("no matches for you"); //employer didn't swipe  TODO:CHANGE THIS BACK TO FALSE
+  }else{
+    logger.info("here are the results for your matches: " + JSON.stringify(results));
+  } 
+});
