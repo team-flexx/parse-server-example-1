@@ -25,11 +25,14 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   logger.info("the swiped job ID: "+ swipedJobID);//this is how to get the info from the joblisting
 
   //get userID from applicant swipe right
-  const swipedUserID = request.user["objectId"];
-  // const swipedAuthorInfo = request.object.get("author");
-  // const stringVersion = JSON.stringify(swipedAuthorInfo);
-  // const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
-  logger.info("swipedAuthorInfo stringified version: "+ JSON.stringify(swipedUserID));
+  //from code review, this has all the info
+  const userInfoPointer = request.user["objectId"];
+
+  //USE FOR TESTING STRING EQUALITY
+  const swipedAuthorInfo = request.object.get("author");
+  const stringVersion = JSON.stringify(swipedAuthorInfo);
+  const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
+  logger.info("swipedAuthorInfo stringified version: "+ swipedUserID);
 
   // //get company from applicant swipe right, TODO: CHECK IF THIS WORKS
   // const swipedCompany = request.object.get("companyName")
@@ -51,37 +54,35 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   const storeMatchBool = true; //TODO: set default to false
 
 //   //calling another function
-//   Parse.Cloud.run("didEmployerSwipe", { jobID: swipedJobID, applicantIDPlainText: swipedUserID}).then(function(result) {
-//     logger.info("result :" + JSON.stringify(result));
-//     storeMatchBool = result;
-//     logger.info(storeMatchBool);
-//             //add row
-//           if (result){ //if match exists
-//             logger.info("let's add a new row");
-//             var SMMatches = Parse.Object.extend("SMMatches");
-//             var aNewMatch = new SMMatches();
-//             aNewMatch.set("user", swipedUserID);
-//             aNewMatch.set("employer", stringVersionCompany); //TODO: check if this works
-//             aNewMatch.set("matchedJobID", swipedJobID);
-//             //TODO: check if this works
-//             aNewMatch.set("jobURL", encoded); //encoded);
+  Parse.Cloud.run("didEmployerSwipe", { jobID: swipedJobID, applicantIDPlainText: swipedUserID}).then(function(result) {
+    logger.info("result :" + JSON.stringify(result));
+    storeMatchBool = result;
+    logger.info(storeMatchBool);
+            //add row
+          if (result){ //if match exists
+            logger.info("let's add a new row");
+            var SMMatches = Parse.Object.extend("SMMatches");
+            var aNewMatch = new SMMatches();
+            aNewMatch.set("user", swipedUserID);
+            aNewMatch.set("userPointer", swipedUserID); //TODO: check if this works
+            aNewMatch.set("matchedJobID", swipedJobID);
 
-//             aNewMatch.save()
-//               .then((aNewMatch) => {
-//                 // Execute any logic that should take place after the object is saved.
-//                 alert('New object created with objectId: ' + aNewMatch.id);
-//               }, (error) => {
-//                 // Execute any logic that should take place if the save fails.
-//                 // error is a Parse.Error with an error code and message.
-//                 alert('Failed to create new object, with error code: ' + error.message);
-//               });
-//           }
-//           else{
-//             logger.info("no new matches")
-//           }
-//   }, function(error) {
-//     logger.info("something went wrong calling cloud function in cloud");
-//   });
+            aNewMatch.save()
+              .then((aNewMatch) => {
+                // Execute any logic that should take place after the object is saved.
+                alert('New object created with objectId: ' + aNewMatch.id);
+              }, (error) => {
+                // Execute any logic that should take place if the save fails.
+                // error is a Parse.Error with an error code and message.
+                alert('Failed to create new object, with error code: ' + error.message);
+              });
+          }
+          else{
+            logger.info("no new matches")
+          }
+  }, function(error) {
+    logger.info("something went wrong calling cloud function in cloud");
+  });
  }
 );
 
