@@ -101,7 +101,7 @@ Parse.Cloud.define("getMatchedData", async (request) => {
     var obj = JSON.parse(wholeRequest);
     logger.info("heres the whole request but parsed" + JSON.stringify(obj));
 
-    const parsedJobPointer = Object.values(obj);
+    const parsedJobPointer = Object.entries(obj);
     logger.info("JOB INFO!!  :" + JSON.stringify(parsedJobPointer));
   } 
 });
