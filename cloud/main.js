@@ -25,7 +25,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   logger.info("the swiped job ID: "+ swipedJobID);//this is how to get the info from the joblisting
 
   //get userID from applicant swipe right
-  const swipedUserID = request.user;
+  const swipedUserID = request.user.get("objectID");
   // const swipedAuthorInfo = request.object.get("author");
   // const stringVersion = JSON.stringify(swipedAuthorInfo);
   // const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
