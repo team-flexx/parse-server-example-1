@@ -96,14 +96,14 @@ Parse.Cloud.define("getMatchedData", async (request) => {
     logger.info("no matches for you"); //employer didn't swipe  TODO:CHANGE THIS BACK TO FALSE
   }else{
     logger.info("here are the results for your matches: " + JSON.stringify(results));
+    return("here are the results for your matches: " + JSON.stringify(results));
+    // const matchName = request.user;
+    // logger.info("THE MATCH NAME: " + JSON.stringify(matchName));
 
-    const matchName = request.user;
-    logger.info("THE MATCH NAME: " + JSON.stringify(matchName));
+    // const matchUserInfo = request.object.get("userPointer");
+    // logger.info("THE MATCH USER INFO: " + JSON.stringify(matchUserInfo));
 
-    const matchUserInfo = request.object.get("userPointer");
-    logger.info("THE MATCH USER INFO: " + JSON.stringify(matchUserInfo));
-
-    const matchJobInfo = request.object.get("jobPointer");
-    logger.info("THE JOB INFO: " + JSON.stringify(matchJobInfo));
+    // const matchJobInfo = request.object.get("jobPointer");
+    // logger.info("THE JOB INFO: " + JSON.stringify(matchJobInfo));
   } 
 });
