@@ -29,7 +29,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   // const swipedAuthorInfo = request.object.get("author");
   // const stringVersion = JSON.stringify(swipedAuthorInfo);
   // const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
-  logger.info("swipedAuthorInfo stringified version: "+ swipedUserID);
+  logger.info("swipedAuthorInfo stringified version: "+ JSON.stringify(swipedUserID));
 
   // //get company from applicant swipe right, TODO: CHECK IF THIS WORKS
   // const swipedCompany = request.object.get("companyName")
