@@ -111,11 +111,10 @@ Parse.Cloud.define("didEmployerSwipe", async (request) => {
 Parse.Cloud.define("getMatchedData", async (request) => {
   const query = new Parse.Query("SMMatches");
   query.equalTo("user", request.params.user); //found that the user as matches, then we want return its pointers to job
-  
-  query.find({
-    success:function(aMatch){
-      logger.info("MATCH:  " + JSON.stringify(aMatch));
+  query.select("jobPointer"); //restrict field returned
 
-    }
-  })
+  query.find().then(function(results){
+    logger.info("HERE ARE RESULTS: "+JSON.stringify(results));
+  });
 });
+
