@@ -27,7 +27,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   logger.info("swipedAuthorInfo stringified version: "+ swipedUserID);
   
   const storeMatchBool = true; //set default to false
-  //DIFERENT TEST
+ 
   Parse.Cloud.run("didEmployerSwipe", { jobID: swipedJobID, applicantIDPlainText: swipedUserID}).then(function(result) {
     logger.info("result :" + JSON.stringify(result));
     storeMatchBool = result;
@@ -70,7 +70,7 @@ Parse.Cloud.define("didEmployerSwipe", async (request) => {
   //return results[0].get("createdAt");
   if (results == undefined || results.length == 0) {
     // array empty or does not exist
-    return false; //employer didn't swipe
+    return true; //employer didn't swipe  TODO:CHANGE THIS BACK TO FALSE
   }else{
     //logger.info(results[0].get("createdAt"));
     return true; //in xcode this returns 1
