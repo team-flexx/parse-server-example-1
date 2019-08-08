@@ -98,7 +98,7 @@ Parse.Cloud.define("getMatchedData", async (request) => {
     logger.info("here are the results for your matches: " + JSON.stringify(results));
 
     const matchName = request.user;
-    logger.info("THE MATCH NAME: " + JSON.stringify(matchName);
+    logger.info("THE MATCH NAME: " + JSON.stringify(matchName));
 
     const matchUserInfo = request.object.get("userPointer");
     logger.info("THE MATCH USER INFO: " + JSON.stringify(matchUserInfo));
