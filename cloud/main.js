@@ -63,9 +63,9 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
             logger.info("let's add a new row");
             var SMMatches = Parse.Object.extend("SMMatches");
             var aNewMatch = new SMMatches();
-            aNewMatch.set("user", swipedUserID);
-            aNewMatch.set("userPointer", swipedUserID); //TODO: check if this works
-            aNewMatch.set("matchedJobID", swipedJobID);
+            aNewMatch.set("user", "TEST");
+            aNewMatch.set("userPointer", "TEST"); //TODO: check if this works
+            aNewMatch.set("matchedJobID", "TEST");
 
             aNewMatch.save()
               .then((aNewMatch) => {
@@ -94,7 +94,7 @@ Parse.Cloud.define("didEmployerSwipe", async (request) => {
   //return results[0].get("createdAt");
   if (results == undefined || results.length == 0) {
     // array empty or does not exist
-    return false; //employer didn't swipe
+    return true; //employer didn't swipe  TODO: CHANGE THIS BACK TO FALSE, JUST USE THIS FOR NOW
   }else{
     //logger.info(results[0].get("createdAt"));
     return true; //in xcode this returns 1
