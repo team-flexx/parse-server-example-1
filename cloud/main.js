@@ -25,9 +25,10 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   logger.info("the swiped job ID: "+ swipedJobID);//this is how to get the info from the joblisting
 
   //get userID from applicant swipe right
-  const swipedAuthorInfo = request.object.get("author");
-  const stringVersion = JSON.stringify(swipedAuthorInfo);
-  const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
+  const swipedUserID = request.user;
+  // const swipedAuthorInfo = request.object.get("author");
+  // const stringVersion = JSON.stringify(swipedAuthorInfo);
+  // const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
   logger.info("swipedAuthorInfo stringified version: "+ swipedUserID);
 
   //get company from applicant swipe right, TODO: CHECK IF THIS WORKS
@@ -43,9 +44,9 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   try {
   logger.info(decodeURI(encoded));
   // expected output: "https://mozilla.org/?x=шеллы"
-} catch(e) { // catches a malformed URI
-  logger.info(e);
-}
+    } catch(e) { // catches a malformed URI
+      logger.info(e);
+    }
 
   const storeMatchBool = true; //TODO: set default to false
 
