@@ -59,7 +59,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
     storeMatchBool = result;
     logger.info(storeMatchBool);
             //add row
-          if (result){ //if match exists
+          //if (result){ //if match exists
             logger.info("let's add a new row");
             var SMMatches = Parse.Object.extend("SMMatches");
             var aNewMatch = new SMMatches();
@@ -76,10 +76,10 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
                 // error is a Parse.Error with an error code and message.
                 alert('Failed to create new object, with error code: ' + error.message);
               });
-          }
-          else{
-            logger.info("no new matches")
-          }
+          //}
+          //else{
+          //  logger.info("no new matches")
+          //}
   }, function(error) {
     logger.info("something went wrong calling cloud function in cloud");
   });
