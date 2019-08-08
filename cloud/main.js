@@ -25,6 +25,9 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
   const stringVersion = JSON.stringify(swipedAuthorInfo);
   const swipedUserID = stringVersion.substring(13, stringVersion.length-4);
   logger.info("swipedAuthorInfo stringified version: "+ swipedUserID);
+
+  //get user POINTERRRR
+  const swipedUserPointer = request.user;
   
   const storeMatchBool = true; //set default to false
  
@@ -42,7 +45,7 @@ Parse.Cloud.afterSave("SMApplicantSwipeRight",(request) =>{
     var SMMatches = Parse.Object.extend("SMMatches");
     var aNewMatch = new SMMatches();
     aNewMatch.set("user", swipedUserID);
-    aNewMatch.set("userPointer", swipedUserID); //CHANGED THIS ONE LINE JUST NOW
+    aNewMatch.set("userPointer", swipedUserPointer); //CHANGED THIS ONE LINE JUST NOW
     aNewMatch.set("employer", "n/a");
     aNewMatch.set("matchedJobID", swipedJobID);
 
