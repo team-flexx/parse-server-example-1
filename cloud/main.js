@@ -115,8 +115,9 @@ Parse.Cloud.define("getMatchedData", async (request) => {
   query.include("jobPointer");
 
   query.find().then(function(results){
-   // logger.info("HERE ARE RESULTS: "+JSON.stringify(results));
-    var obj = JSON.parse(results);
+   logger.info("HERE ARE RESULTS: "+JSON.stringify(results));
+    
+   //var obj = JSON.parse(results);
 
     // var hi = [];
     // for (i = 0; i < results.length; i++) {
