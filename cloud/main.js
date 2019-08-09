@@ -114,11 +114,11 @@ Parse.Cloud.define("getMatchedData", async (request) => {
   query.select("jobPointer"); //restrict field returned
 
   query.find().then(function(results){
-    logger.info("HERE ARE RESULTS: "+JSON.stringify(results));
+   // logger.info("HERE ARE RESULTS: "+JSON.stringify(results));
     var obj = JSON.parse(results);
 
     obj[1].get("jobPointer").fetch().then(function(job) {
-      logger.info(JSON.stringify(job));
+      logger.info("one object: "+ JSON.stringify(job));
     });
 
     // var hi = [];
