@@ -112,14 +112,11 @@ Parse.Cloud.define("getMatchedData", async (request) => {
   const query = new Parse.Query("SMMatches");
   query.equalTo("user", request.params.user); //found that the user as matches, then we want return its pointers to job
   query.select("jobPointer"); //restrict field returned
+  query.include("jobPointer");
 
   query.find().then(function(results){
    // logger.info("HERE ARE RESULTS: "+JSON.stringify(results));
     var obj = JSON.parse(results);
-
-    obj[1]["jobPointer"].fetch().then(function(job) {
-      logger.info("one object: "+ JSON.stringify(job));
-    });
 
     // var hi = [];
     // for (i = 0; i < results.length; i++) {
