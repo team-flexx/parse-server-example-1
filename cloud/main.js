@@ -114,17 +114,9 @@ Parse.Cloud.define("getMatchedData", async (request) => {
   query.select("jobPointer"); //restrict field returned
   query.include("jobPointer");
 
-  query.find().then(function(results){
-   logger.info("HERE ARE RESULTS: "+JSON.stringify(results));
-    
-   //var obj = JSON.parse(results);
-
-    // var hi = [];
-    // for (i = 0; i < results.length; i++) {
-    //   logger.info(JSON.stringify(obj[i]["jobPointer"]));
-    //   //GET THE JOB LISTING OBJECT ID
-    //   //QUERY INTO SMJOBLISTING AND PULL UP COMPANY NAME AND EMPLOYER URL
-    // }
-
-  });
+  const matches = await query.find();
+  // logger.info("matches to return: " + JSON.stringify(matches));
+  const unwrappedMatches = matches.map(match => match["jobPointer"]);
+  logger.info("matches to return: " + JSON.stringify(unwrappedMatches));
+  return unwrappedMatches;
 });
