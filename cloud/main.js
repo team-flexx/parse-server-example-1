@@ -116,7 +116,10 @@ Parse.Cloud.define("getMatchedData", async (request) => {
 
   const matches = await query.find();
   // logger.info("matches to return: " + JSON.stringify(matches));
-  const unwrappedMatches = matches.map(match => match["jobPointer"]);
-  logger.info("matches to return: " + JSON.stringify(unwrappedMatches));
+  const unwrappedMatches = matches.map(match => {
+    logger.info("match: " + JSON.stringify(match));
+    return match["jobPointer"];
+  });
+  // logger.info("matches to return: " + JSON.stringify(unwrappedMatches));
   return unwrappedMatches;
 });
